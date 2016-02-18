@@ -1,0 +1,2 @@
+python3 manage.py migrate --noinput
+exec "gunicorn --pid {{ settings.PROJECT }}-{{ settings.TIER }} --bind 0.0.0.0:5000 config.wsgi:application"

@@ -42,7 +42,7 @@ This command assumes you're using [jwilder/nginx-proxy](https://github.com/jwild
 
 Set the appropriate settings and environment variables, then run:
 
-	python manage.py ecs-deploy
+	python manage.py ecsdeploy
 
 ## Possible Features
 
