@@ -1,8 +1,8 @@
-{{% load makeconf %}
+{
     "family": "{{ settings.PROJECT }}-{{ settings.TIER }}",
     "containerDefinitions": [
         {
-            "image": "{{ settings.DOCKER_REPOSITORY }}/{{ settings.PROJECT }}:{{ settings.TIER }}{{ 'BUILD_ID'|environ }}",
+            "image": "{{ settings.DOCKER_REPOSITORY }}/{{ settings.PROJECT }}:{{ settings.TIER }}{{ environ.BUILD_ID }}",
             "name": "{{ settings.PROJECT }}-{{ settings.TIER }}",
             "cpu": 10,
             "memory": 256,
@@ -10,15 +10,15 @@
             "environment": [
                 {
                     "name": "VIRTUAL_HOST",
-                    "value": "{{ settings.VIRTUAL_HOST }}"
+                    "value": "{{ environ.VIRTUAL_HOST }}"
                 },
                 {
                     "name": "RDS_PASSWORD",
-                    "value": "{{ 'RDS_PASSWORD'|environ }}"
+                    "value": "{{ environ.RDS_PASSWORD }}"
                 },
                 {
                     "name": "DJANGO_SETTINGS_MODULE",
-                    "value": "{{ 'DJANGO_SETTINGS_MODULE'|environ }}"
+                    "value": "{{ environ.DJANGO_SETTINGS_MODULE }}"
                 }
             ]
         }

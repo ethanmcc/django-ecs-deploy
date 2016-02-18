@@ -8,11 +8,10 @@ From your Django app, install the module from pip:
 
 	pip install django-ecs-deploy
 	
-Then make sure it (and `makeconf`) are included in your `INSTALLED_APPS` section:
+Then make sure it is included in your `INSTALLED_APPS` section:
 
 	INSTALLED_APPS = (
 		...
-	    'makeconf',
 	    'ecs-deploy',
 	)
 

@@ -30,7 +30,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         settings.TEMPLATE_DEBUG = True
         self.executable_extensions = ('.sh',)
-        context = Context({'settings': settings})
+        context = Context({'settings': settings, 'environ': os.environ})
 
         template_map = {
             'Dockerfile': 'dockerfile.tmpl',
