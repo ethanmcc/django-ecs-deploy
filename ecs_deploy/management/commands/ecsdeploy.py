@@ -60,7 +60,7 @@ class Command(BaseCommand):
             'aws ecs register-task-definition --family {0} --cli-input-json '
             'file://ecs-task-definition.json'.format(task_family),
             'aws ecs update-service --cluster default --service {0} '
-            '--task-definition'.format(task_family),
+            '--task-definition {0}'.format(task_family),
         )
 
         for command in commands:
