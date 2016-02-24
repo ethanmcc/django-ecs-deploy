@@ -24,6 +24,7 @@ OPTIONAL_SETTINGS = (
     'CREDENTIALS_BUCKET',
     'CREDENTIALS_KEY',
     'CREDENTIALS_DEST_PATH',
+    'ECS_CLUSTER',
 )
 
 
@@ -76,6 +77,7 @@ class Command(BaseCommand):
                                                   os.environ.get('BUILD_ID'))
         docker_tag_url = '{0.DOCKER_REPOSITORY}/{0.PROJECT}:{1}'.format(
             settings, docker_version_tag)
+        ecs_cluster = context.get('ECS_CLUSTER') or 'default'
 
         # TODO: replace all of these commands with boto and py-docker commands
         commands = (
@@ -84,8 +86,8 @@ class Command(BaseCommand):
             'docker push {0}'.format(docker_tag_url),
             'aws ecs register-task-definition --family {0} --cli-input-json '
             'file://ecs-task-definition.json'.format(task_family),
-            'aws ecs update-service --cluster default --service {0} '
-            '--task-definition {0}'.format(task_family),
+            'aws ecs update-service --cluster {0} --service {1} '
+            '--task-definition {1}'.format(ecs_cluster, task_family),
         )
 
         for command in commands:

@@ -33,7 +33,7 @@ This command assumes you're using [jwilder/nginx-proxy](https://github.com/jwild
 * `DOCKER_APT_PACKAGES` (optional) - If set, a list of Debian package names will be installed
 * `DOCKER_YUM_PACKAGES` (optional) - If set, a list of Yum package names will be installed
 * `COMPRESS_ENABLED` (optional) - If set, `python manage.py compress --force` will be run during image build
-* `REQUIRES_ECR_LOGIN` (optional) - Set this to `True` if pushing to and deploying from Amazon ECR. It will execute the correct Docker login command based on your AWS credentials.
+* `ECS_CLUSTER` (optional) - Defaults to `default`. If set, override ECS cluster name your services will be deployed to.
 
 The following three keys require `awscli` to be installed via your `requirements.txt`:
 
