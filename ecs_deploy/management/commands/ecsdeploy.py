@@ -77,7 +77,7 @@ class Command(BaseCommand):
                                                   os.environ.get('BUILD_ID'))
         docker_tag_url = '{0.DOCKER_REPOSITORY}/{0.PROJECT}:{1}'.format(
             settings, docker_version_tag)
-        ecs_cluster = context.get('ECS_CLUSTER', 'default')
+        ecs_cluster = context.get('ECS_CLUSTER') or 'default'
 
         # TODO: replace all of these commands with boto and py-docker commands
         commands = (
