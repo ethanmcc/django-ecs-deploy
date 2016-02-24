@@ -1,0 +1,25 @@
+FROM {{ DOCKER_REPOSITORY }}/{{ DOCKER_IMAGE }}
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+{% if DOCKER_YUM_PACKAGES %}
+RUN yum install -y {{ DOCKER_APT_PACKAGES|join:' ' }}
+
+{% endif %}
+{% if DOCKER_APT_PACKAGES %}
+RUN apt-get install -y {{ DOCKER_APT_PACKAGES|join:' ' }}
+
+{% endif %}
+COPY requirements.txt /usr/src/app/
+RUN pip3 install -r requirements.txt
+
+COPY . /usr/src/app
+RUN rm -rf static
+RUN python3 manage.py collectstatic --noinput
+{% if COMPRESS_ENABLED %}
+RUN python3 manage.py compress --force
+{% endif %}
+
+EXPOSE 5000
+CMD ["sh", "start_app.sh"]

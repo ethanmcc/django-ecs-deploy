@@ -1,0 +1,22 @@
+{
+    "family": "{{ PROJECT }}-{{ TIER }}",
+    "containerDefinitions": [
+        {
+            "image": "{{ DOCKER_REPOSITORY }}/{{ PROJECT }}:{{ TIER }}{{ BUILD_ID }}",
+            "name": "{{ PROJECT }}-{{ TIER }}",
+            "cpu": 10,
+            "memory": 256,
+            "essential": true,
+            "environment": [
+                {
+                    "name": "VIRTUAL_HOST",
+                    "value": "{{ VIRTUAL_HOST }}"
+                },
+                {
+                    "name": "DJANGO_SETTINGS_MODULE",
+                    "value": "{{ DJANGO_SETTINGS_MODULE }}"
+                }
+            ]
+        }
+    ]
+}

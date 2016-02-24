@@ -1,0 +1,3 @@
+{% if CREDENTIALS_KEY %}aws s3 cp s3://{{ CREDENTIALS_BUCKET }}/{{ CREDENTIALS_KEY }} {{ CREDENTIALS_DEST_PATH }}
+{% endif %}python3 manage.py migrate --noinput
+exec gunicorn --pid {{ PROJECT }}-{{ TIER }} --bind 0.0.0.0:5000 config.wsgi:application
