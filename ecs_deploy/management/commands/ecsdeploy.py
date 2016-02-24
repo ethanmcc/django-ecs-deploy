@@ -5,7 +5,26 @@ import sys
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from django.template import loader, Context
+from django.template import loader
+
+
+REQUIRED_SETTINGS = (
+    'PROJECT',
+    'TIER',
+    'DOCKER_REPOSITORY',
+    'DOCKER_IMAGE',
+    'BUILD_ID',
+    'DJANGO_SETTINGS_MODULE',
+)
+OPTIONAL_SETTINGS = (
+    'VIRTUAL_HOST',
+    'DOCKER_APT_PACKAGES',
+    'DOCKER_YUM_PACKAGES',
+    'COMPRESS_ENABLED',
+    'CREDENTIALS_BUCKET',
+    'CREDENTIALS_KEY',
+    'CREDENTIALS_DEST_PATH',
+)
 
 
 class Command(BaseCommand):
@@ -30,7 +49,18 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         settings.TEMPLATE_DEBUG = True
         self.executable_extensions = ('.sh',)
-        context = Context({'settings': settings, 'environ': os.environ})
+
+        required_settings = {
+            opt: os.environ.get(opt) or getattr(settings, opt)
+            for opt in REQUIRED_SETTINGS
+        }
+        optional_settings = {
+            opt: os.environ.get(opt) or getattr(settings, opt, '')
+            for opt in OPTIONAL_SETTINGS
+        }
+        context = {}
+        context.update(required_settings)
+        context.update(optional_settings)
 
         template_map = {
             'Dockerfile': 'dockerfile.tmpl',
@@ -46,11 +76,6 @@ class Command(BaseCommand):
                                                   os.environ.get('BUILD_ID'))
         docker_tag_url = '{0.DOCKER_REPOSITORY}/{0.PROJECT}:{1}'.format(
             settings, docker_version_tag)
-
-        if hasattr(settings,
-                   'REQUIRES_ECS_LOGIN') and settings.REQUIRES_ECS_LOGIN:
-            if os.system('`aws ecr get-login --region us-east-1`') > 0:
-                sys.exit(1)
 
         # TODO: replace all of these commands with boto and py-docker commands
         commands = (

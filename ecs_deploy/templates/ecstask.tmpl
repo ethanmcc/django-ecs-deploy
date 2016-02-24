@@ -1,24 +1,24 @@
 {
-    "family": "{{ settings.PROJECT }}-{{ settings.TIER }}",
+    "family": "{{ PROJECT }}-{{ TIER }}",
     "containerDefinitions": [
         {
-            "image": "{{ settings.DOCKER_REPOSITORY }}/{{ settings.PROJECT }}:{{ settings.TIER }}{{ environ.BUILD_ID }}",
-            "name": "{{ settings.PROJECT }}-{{ settings.TIER }}",
+            "image": "{{ DOCKER_REPOSITORY }}/{{ PROJECT }}:{{ TIER }}{{ BUILD_ID }}",
+            "name": "{{ PROJECT }}-{{ TIER }}",
             "cpu": 10,
             "memory": 256,
             "essential": true,
             "environment": [
                 {
                     "name": "VIRTUAL_HOST",
-                    "value": "{{ environ.VIRTUAL_HOST }}"
+                    "value": "{{ VIRTUAL_HOST }}"
                 },
                 {
                     "name": "RDS_PASSWORD",
-                    "value": "{{ environ.RDS_PASSWORD }}"
+                    "value": "{{ RDS_PASSWORD }}"
                 },
                 {
                     "name": "DJANGO_SETTINGS_MODULE",
-                    "value": "{{ environ.DJANGO_SETTINGS_MODULE }}"
+                    "value": "{{ DJANGO_SETTINGS_MODULE }}"
                 }
             ]
         }
