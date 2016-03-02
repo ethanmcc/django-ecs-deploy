@@ -19,8 +19,8 @@
             ]{% if DOCKER_HOST_PORT %},
             "portMappings": [
                 {
-                    "hostPort": "{{ DOCKER_HOST_PORT}}",
-                    "containerPort": "{{ DOCKER_CONTAINER_PORT|default:DOCKER_HOST_PORT }}",
+                    "hostPort": {{ DOCKER_HOST_PORT}},
+                    "containerPort": {{ DOCKER_CONTAINER_PORT|default:DOCKER_HOST_PORT }},
                     "protocol": "{{ DOCKER_PORT_PROTOCOL|default:"tcp"}}"
                 }
             ]{% endif %}
