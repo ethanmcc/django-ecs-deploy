@@ -16,7 +16,14 @@
                     "name": "DJANGO_SETTINGS_MODULE",
                     "value": "{{ DJANGO_SETTINGS_MODULE }}"
                 }
-            ]
+            ]{% if DOCKER_HOST_PORT %},
+            "portMappings": [
+                {
+                    "hostPort": "{{ DOCKER_HOST_PORT}}",
+                    "containerPort": "{{ DOCKER_CONTAINER_PORT|default:DOCKER_HOST_PORT }}",
+                    "protocol": "{{ DOCKER_PORT_PROTOCOL|default:"tcp"}}"
+                }
+            ]{% endif %}
         }
     ]
 }
