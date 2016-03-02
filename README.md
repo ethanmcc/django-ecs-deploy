@@ -35,6 +35,16 @@ This command assumes you're using [jwilder/nginx-proxy](https://github.com/jwild
 * `COMPRESS_ENABLED` (optional) - If set, `python manage.py compress --force` will be run during image build
 * `ECS_CLUSTER` (optional) - Defaults to `default`. If set, override ECS cluster name your services will be deployed to.
 
+#### Port Mapping
+
+Mapping one port is currently supported using the following settings:
+
+* `DOCKER_HOST_PORT` (optional) - The port to use on the host machine. No mapping will be configured if this is not set.
+* `DOCKER_CONTAINER_PORT` (optional) - Defaults to `DOCKER_HOST_PORT`
+* `DOCKER_PORT_PROTOCOL` (optional) - Defaults to `tcp`
+
+#### Secure Credential Deployment
+
 The following three keys require `awscli` to be installed via your `requirements.txt`:
 
 * `CREDENTIALS_BUCKET` (optional) - source s3 bucket name to retrieve credentials onto Docker container
