@@ -34,6 +34,7 @@ This command assumes you're using [jwilder/nginx-proxy](https://github.com/jwild
 * `DOCKER_YUM_PACKAGES` (optional) - If set, a list of Yum package names will be installed
 * `COMPRESS_ENABLED` (optional) - If set, `python manage.py compress --force` will be run during image build
 * `ECS_CLUSTER` (optional) - Defaults to `default`. If set, override ECS cluster name your services will be deployed to.
+* `DOCKER_MAX_MEMORY` (optional) - Defaults to 256. Sets max memory in task definition.
 
 #### Port Mapping
 

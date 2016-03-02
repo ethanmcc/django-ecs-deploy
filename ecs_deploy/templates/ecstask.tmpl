@@ -5,7 +5,7 @@
             "image": "{{ DOCKER_REPOSITORY }}/{{ PROJECT }}:{{ TIER }}{{ BUILD_ID }}",
             "name": "{{ PROJECT }}-{{ TIER }}",
             "cpu": 10,
-            "memory": 256,
+            "memory": {{ DOCKER_MAX_MEMORY|default:256 }},
             "essential": true,
             "environment": [
                 {
