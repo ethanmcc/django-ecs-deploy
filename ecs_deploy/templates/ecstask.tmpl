@@ -5,7 +5,7 @@
             "image": "{{ DOCKER_REPOSITORY }}/{{ PROJECT }}:{{ TIER }}{{ BUILD_ID }}",
             "name": "{{ PROJECT }}-{{ TIER }}",
             "cpu": 10,
-            "memory": 256,
+            "memory": {{ DOCKER_MAX_MEMORY|default:256 }},
             "essential": true,
             "environment": [
                 {
@@ -19,8 +19,8 @@
             ]{% if DOCKER_HOST_PORT %},
             "portMappings": [
                 {
-                    "hostPort": "{{ DOCKER_HOST_PORT}}",
-                    "containerPort": "{{ DOCKER_CONTAINER_PORT|default:DOCKER_HOST_PORT }}",
+                    "hostPort": {{ DOCKER_HOST_PORT}},
+                    "containerPort": {{ DOCKER_CONTAINER_PORT|default:DOCKER_HOST_PORT }},
                     "protocol": "{{ DOCKER_PORT_PROTOCOL|default:"tcp"}}"
                 }
             ]{% endif %}
