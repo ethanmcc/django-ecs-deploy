@@ -12,7 +12,7 @@ Then make sure it is included in your `INSTALLED_APPS` section:
 
 	INSTALLED_APPS = (
 		...
-	    'ecs-deploy',
+	    'ecs_deploy',
 	)
 
 ## Usage
