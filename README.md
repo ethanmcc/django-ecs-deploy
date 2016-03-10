@@ -54,7 +54,7 @@ The following three keys require `awscli` to be installed via your `requirements
 
 The basic command for the retrieval of the credentials counts on an IAM role with access to your bucket, and looks like this:
 
-	aws s3 sync s3://{{ CREDENTIALS_BUCKET }}/{{ CREDENTIALS_KEY }} {{ CREDENTIALS_DEST_PATH }}
+	aws s3 cp s3://{{ CREDENTIALS_BUCKET }}/{{ CREDENTIALS_KEY }} {{ CREDENTIALS_DEST_PATH }}
 
 ### Execution
 
