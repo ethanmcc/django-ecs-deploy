@@ -3,8 +3,12 @@ FROM {{ DOCKER_REPOSITORY }}/{{ DOCKER_IMAGE }}
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+{% if CREATE_FREETDS_CONFIG %}
+COPY freetds.conf /etc/freetds.conf
+
+{% endif %}
 {% if DOCKER_YUM_PACKAGES %}
-RUN yum install -y {{ DOCKER_APT_PACKAGES|join:' ' }}
+RUN yum install -y {{ DOCKER_YUM_PACKAGES|join:' ' }}
 
 {% endif %}
 {% if DOCKER_APT_PACKAGES %}

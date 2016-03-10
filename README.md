@@ -32,6 +32,7 @@ This command assumes you're using [jwilder/nginx-proxy](https://github.com/jwild
 * `VIRTUAL_HOST` (optional) - For use with [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy)
 * `DOCKER_APT_PACKAGES` (optional) - If set, a list of Debian package names will be installed
 * `DOCKER_YUM_PACKAGES` (optional) - If set, a list of Yum package names will be installed
+* `CREATE_FREETDS_CONFIG` (optional) - If set, `/etc/freetds.conf` will be created with reasonable defaults
 * `COMPRESS_ENABLED` (optional) - If set, `python manage.py compress --force` will be run during image build
 * `ECS_CLUSTER` (optional) - Defaults to `default`. If set, override ECS cluster name your services will be deployed to.
 * `DOCKER_MAX_MEMORY` (optional) - Defaults to 256. Sets max memory in task definition.
