@@ -29,6 +29,7 @@ OPTIONAL_SETTINGS = (
     'DOCKER_CONTAINER_PORT',
     'DOCKER_PORT_PROTOCOL',
     'DOCKER_MAX_MEMORY',
+    'CREATE_FREETDS_CONFIG',
 )
 
 
@@ -72,6 +73,8 @@ class Command(BaseCommand):
             'start_app.sh': 'gunicorn.tmpl',
             'ecs-task-definition.json': 'ecstask.tmpl',
         }
+        if context.get('CREATE_FREETDS_CONFIG'):
+            template_map['freetds.conf'] = 'freetds.tmpl'
 
         for path, template in sorted(template_map.items()):
             self.render_template(template, path, context)
